@@ -3,19 +3,41 @@ mod lexer;
 mod stack;
 
 fn main() {
-    let code = "PUSH_INT 6 PUSH_INT 5 ADD";
-
-    let mut lex = lexer::Token::lexer(code);
-
+    use text_io::read;
+    println!("\nPlease input a valid LIFO program:");
+    let input: String = read!("{}\n");
+    let mut lex = lexer::Token::lexer(&input);
     while let Some(token) = lex.next() {
         match token {
             Ok(_tk) => (), // println!("{:#?}", tk),
-            Err(err) => panic!("an error occurred: {:?}", err),
+            Err(err) => panic!(
+                "an error occurred with this input: `{:?}`\nerror: {:?}",
+                input, err
+            ),
         }
     }
+    if lex.extras.stack.len() == 0 {
+        println!("\nEmpty stack")
+    } else {
+        println!(
+            "\nStack length: {}\nTop stack value: `{}`",
+            lex.extras.stack.len(),
+            lex.extras.stack[0].clone().print()
+        );
+    }
+    // let code = "PUSH_INT 6 PUSH_INT 5 ADD";
 
-    println!("{}", code);
-    println!("extras: {:?}", lex.extras.stack)
+    // let mut lex = lexer::Token::lexer(code);
+
+    // while let Some(token) = lex.next() {
+    //     match token {
+    //         Ok(_tk) => (), // println!("{:#?}", tk),
+    //         Err(err) => panic!("an error occurred: {:?}", err),
+    //     }
+    // }
+
+    // println!("{}", code);
+    // println!("extras: {:?}", lex.extras.stack)
 }
 
 #[cfg(test)]

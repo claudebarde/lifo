@@ -85,6 +85,15 @@ impl StackEl {
             value: val,
         }
     }
+
+    pub fn print(self) -> String {
+        match &self.value {
+            StackElValue::Bool(val) => format!("{} : bool", val),
+            StackElValue::Int(val) => format!("{} : int", val),
+            StackElValue::String(val) => format!("{} : string", val),
+            StackElValue::Vector(val) => format!("{:?} : vector", val),
+        }
+    }
 }
 
 pub type Stack = Vec<StackEl>;
