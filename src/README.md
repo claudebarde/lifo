@@ -1,0 +1,3 @@
+LIFO (for "last in first out") is a simple stack-based programming language designed as an example to show other developers how stack-based languages work.
+
+Tutorial to come...
