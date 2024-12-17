@@ -109,7 +109,12 @@ pub fn add(stack: &Stack) -> Result<Stack, String> {
         &stack[1].token,
         &stack[1].value,
     ) {
-        (Token::Int, StackElValue::Int(val1), Token::Int, StackElValue::Int(val2)) => {
+        (
+            Token::Int | Token::Index,
+            StackElValue::Int(val1),
+            Token::Int | Token::Index,
+            StackElValue::Int(val2),
+        ) => {
             let new_value = val1 + val2;
             let new_stack = vec![
                 vec![StackEl::new(Token::Int, StackElValue::Int(new_value))],
